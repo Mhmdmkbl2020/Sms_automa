@@ -24,13 +24,18 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # الخطوة 3: ترجمة الكود
+    # الخطوة 3: التحقق من الملفات والمجلدات
+    - name: Debug directories
+      run: |
+        echo "Root directory contents:"
+        dir
+        echo "Contents of windows folder:"
+        dir windows
+        echo "Contents of shared folder:"
+        dir shared
+
+    # الخطوة 4: ترجمة الكود
     - name: Compile Windows Project
       run: |
-        mkdir -p windows/out
-        javac -d windows/out windows/*.java shared/*.java
-
-    # الخطوة 4: تشغيل الاختبارات (إن وجدت)
-    - name: Run Tests
-      run: |
-        echo "No specific tests available. Add your test commands here if needed."
+        mkdir windows/out
+        javac -d windows/out windows/**/*.java shared/*.java
